@@ -1,36 +1,41 @@
-var cityItem = "Chicago";  //Global Variable
-var cityItem = "Boston"; 
-var cityItem = "Toronto"; 
-var cityItems = "";
+// Initialize variables
+var cityItem = "Chicago";   //Global Variable
+var cityItem = "Boston";   //Global Variable
+var cityItem = "Toronto";  //Global Variable
+var cityItems = "";        //Global Variable
 
 var $ = function (id) {
     return document.getElementById(id);
 }
 
-var searchItem = function ()
+var searchCity = function ()
 {
-    var item = $("item").value;
+    var cities = $("cities").value;
 	
 	
-	var itemLower = item.toLowerCase();
-	var cityItemsLower = cityItems.toLowerCase();
+	var citiesLower = cities.toLowerCase();
+	var citiesEnteredLower = citiesEntered.toLowerCase();
     
-   	var foundStartPos = cityItemsLower.indexOf(itemLower);
+   	var foundStartPos = citiesEntered.indexOf(cities);
 	
 	if (foundStartPos >= 0)
 	{
-		var itemLen = item.length;
+        var cityLen = cities.length;
+        
+        var firstPart = citiesEntered.substr(0, foundStartPos);
+        var lastPart = citiesEntered.substr(foundStartPos + cityLen);
+                var chicagoMsg = "Chicago was on the list!"
 		
-		$("msg").innerHTML = $("msg").innerHTML = item + " was found in the list!"; //firstPart + middlePart + lastPart;
+		$("msg").innerHTML = firstPart + lastPart + chicagoMsg;
 		
 	}
 	else
 	{
-		$("msg").innerHTML = item + " was NOT found in the list!";
+		$("msg").innerHTML = "Chicago was NOT found in the list!<br><br>" + citiesEntered;
 	}
                
-    $("item").value = "";
-    $("item").focus();  
+    $("cities").value = "";
+    $("cities").focus();  
 }
 
 window.onload = function ()
