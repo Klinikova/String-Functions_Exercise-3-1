@@ -1,45 +1,39 @@
-// Initialize variables
-var cityItem = "Chicago";   //Global Variable
-var cityItem = "Boston";   //Global Variable
-var cityItem = "Toronto";  //Global Variable
-var cityItems = "";        //Global Variable
-
 var $ = function (id) {
     return document.getElementById(id);
 }
 
 var searchCity = function ()
 {
-    var cities = $("cities").value;
-	
-	
-	var citiesLower = cities.toLowerCase();
-	var citiesEnteredLower = citiesEntered.toLowerCase();
+    var cities = ['Chicago', 'Boston', 'Toronto'];
+    var inputCity = $("city").value;
+    var outputCity = capitalizeFirstLetter(inputCity);
     
-   	var foundStartPos = citiesEntered.indexOf(cities);
+   	var foundStartPos = cities.indexOf(outputCity);
 	
 	if (foundStartPos >= 0)
-	{
-        var cityLen = cities.length;
-        
-        var firstPart = citiesEntered.substr(0, foundStartPos);
-        var lastPart = citiesEntered.substr(foundStartPos + cityLen);
-                var chicagoMsg = "Chicago was on the list!"
-		
-		$("msg").innerHTML = firstPart + lastPart + chicagoMsg;
+	{   
+		$("msg").innerHTML = outputCity + " was found in the list!";
 		
 	}
 	else
 	{
-		$("msg").innerHTML = "Chicago was NOT found in the list!<br><br>" + citiesEntered;
+		$("msg").innerHTML = outputCity +  " was NOT found in the list!";
 	}
-               
-    $("cities").value = "";
-    $("cities").focus();  
+    $("cities").innerHTML = cities.join(", ");         
+    $("city").value = ""; 
+}
+
+function capitalizeFirstLetter(string) {
+    string = string.split(' ');
+
+    for (var i = 0; i < string.length; i++) {
+        string[i] = string[i].charAt(0).toUpperCase() + string[i].slice(1).toLowerCase(); 
+    }
+    return string.join(' ');
 }
 
 window.onload = function ()
 {
-	$("mysearchbutton").onclick = searchItem;  
-    $("item").focus();   
+	$("mysearchbutton").onclick = searchCity;  
+      
 }
